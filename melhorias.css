@@ -1,0 +1,504 @@
+/* ============================================
+   MELHORIAS DE CONVERSÃO - CSS ADICIONAL
+   Gamificação, FOMO, Animações Avançadas
+   ============================================ */
+
+/* ============================================
+   PAINEL DE CONTROLE GAMIFICADO
+   ============================================ */
+.control-panel-gamified {
+    background: rgba(12, 16, 17, 0.95);
+    border: 1px solid rgba(100, 82, 212, 0.2);
+    border-radius: clamp(16px, 5vw, 24px);
+    padding: clamp(20px, 5vw, 28px);
+    margin-bottom: clamp(24px, 6vw, 32px);
+}
+
+.control-panel-title {
+    font-size: clamp(18px, 4.5vw, 22px);
+    font-weight: 700;
+    text-align: center;
+    color: #F9F9F9;
+    margin-bottom: clamp(20px, 5vw, 28px);
+    line-height: 1.3;
+}
+
+.control-panel-title .gradient {
+    background: linear-gradient(135deg, #4a37b6 0%, #ab58f4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.control-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 3vw, 14px);
+}
+
+.control-btn {
+    background: rgba(100, 82, 212, 0.08);
+    border: 1px solid rgba(100, 82, 212, 0.2);
+    border-radius: clamp(12px, 3vw, 16px);
+    padding: clamp(14px, 3.5vw, 18px) clamp(12px, 3vw, 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(8px, 2vw, 12px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn:hover {
+    background: rgba(100, 82, 212, 0.15);
+    border-color: rgba(100, 82, 212, 0.4);
+    transform: translateY(-2px);
+}
+
+.control-btn:active {
+    transform: scale(0.98);
+}
+
+.control-btn-icon {
+    width: clamp(40px, 11vw, 50px);
+    height: clamp(40px, 11vw, 50px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.control-btn-icon.messages { background: linear-gradient(135deg, rgba(0, 161, 224, 0.2), rgba(0, 161, 224, 0.1)); }
+.control-btn-icon.photos { background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.1)); }
+.control-btn-icon.location { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1)); }
+.control-btn-icon.stories { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1)); }
+.control-btn-icon.alerts { background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1)); }
+.control-btn-icon.deleted { background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1)); }
+
+.control-btn-icon svg {
+    width: clamp(20px, 5.5vw, 26px);
+    height: clamp(20px, 5.5vw, 26px);
+}
+
+.control-btn-icon.messages svg { color: #00A1E0; }
+.control-btn-icon.photos svg { color: #EC4899; }
+.control-btn-icon.location svg { color: #10B981; }
+.control-btn-icon.stories svg { color: #8B5CF6; }
+.control-btn-icon.alerts svg { color: #FBBF24; }
+.control-btn-icon.deleted svg { color: #EF4444; }
+
+.control-btn-text {
+    font-size: clamp(11px, 2.8vw, 13px);
+    color: #D1D5DB;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.control-btn-status {
+    font-size: clamp(9px, 2.2vw, 10px);
+    color: #EF4444;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.control-btn-status svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* Efeito de bloqueio pulsante */
+.control-btn::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: #EF4444;
+    border-radius: 50%;
+    animation: pulse-lock 2s ease-in-out infinite;
+}
+
+@keyframes pulse-lock {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* ============================================
+   POP-UP FOMO (PROVA SOCIAL DINÂMICA)
+   ============================================ */
+.fomo-popup {
+    position: fixed;
+    bottom: 100px;
+    left: 16px;
+    background: rgba(12, 16, 17, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9998;
+    max-width: 300px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.1);
+    transform: translateX(-120%);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.fomo-popup.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.fomo-popup.hide {
+    transform: translateX(-120%);
+    opacity: 0;
+}
+
+.fomo-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10B981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fomo-avatar svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.fomo-content {
+    flex: 1;
+}
+
+.fomo-text {
+    font-size: 12px;
+    color: #F9F9F9;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.fomo-text strong {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.fomo-time {
+    font-size: 10px;
+    color: #9CA3AF;
+    margin-top: 2px;
+}
+
+.fomo-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: none;
+    border: none;
+    color: #6B7280;
+    cursor: pointer;
+    padding: 2px;
+    line-height: 1;
+}
+
+.fomo-close:hover {
+    color: #9CA3AF;
+}
+
+/* ============================================
+   ANIMAÇÃO DE DESCRIPTOGRAFIA
+   ============================================ */
+.decrypt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10001;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.decrypt-overlay.show {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.decrypt-container {
+    background: rgba(12, 16, 17, 0.98);
+    border: 1px solid rgba(100, 82, 212, 0.3);
+    border-radius: 20px;
+    padding: clamp(24px, 6vw, 36px);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.decrypt-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, rgba(100, 82, 212, 0.2), rgba(171, 88, 244, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-decrypt 2s ease-in-out infinite;
+}
+
+@keyframes pulse-decrypt {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(100, 82, 212, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(100, 82, 212, 0.1); }
+}
+
+.decrypt-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #ab58f4;
+}
+
+.decrypt-title {
+    font-size: clamp(18px, 5vw, 24px);
+    font-weight: 700;
+    color: #F9F9F9;
+    margin-bottom: 12px;
+}
+
+.decrypt-status {
+    font-size: clamp(13px, 3.5vw, 15px);
+    color: #D1D5DB;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.decrypt-progress-container {
+    background: rgba(100, 82, 212, 0.1);
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.decrypt-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4a37b6, #ab58f4);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.decrypt-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer-progress 1.5s infinite;
+}
+
+@keyframes shimmer-progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.decrypt-percentage {
+    font-size: clamp(24px, 6vw, 32px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #4a37b6, #ab58f4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.decrypt-file {
+    font-size: 11px;
+    color: #6B7280;
+    font-family: monospace;
+    margin-bottom: 20px;
+    word-break: break-all;
+}
+
+/* Estado de erro */
+.decrypt-container.error .decrypt-icon {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+    animation: shake 0.5s ease;
+}
+
+.decrypt-container.error .decrypt-icon svg {
+    color: #EF4444;
+}
+
+.decrypt-container.error .decrypt-progress-bar {
+    background: linear-gradient(90deg, #EF4444, #DC2626);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.decrypt-error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.decrypt-error-message p {
+    color: #F9F9F9;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+}
+
+.decrypt-error-message .error-code {
+    color: #EF4444;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.decrypt-unlock-btn {
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.decrypt-unlock-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* ============================================
+   COPY EMOCIONAL - HEADLINES
+   ============================================ */
+.emotional-headline {
+    text-align: center;
+    margin-bottom: clamp(20px, 5vw, 28px);
+}
+
+.emotional-headline h2 {
+    font-size: clamp(20px, 5.5vw, 28px);
+    font-weight: 700;
+    color: #F9F9F9;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.emotional-headline p {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: #9CA3AF;
+    line-height: 1.5;
+}
+
+.emotional-highlight {
+    color: #10B981;
+    font-weight: 600;
+}
+
+/* ============================================
+   BADGE DE URGÊNCIA MELHORADO
+   ============================================ */
+.urgency-badge {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    animation: urgency-pulse 3s ease-in-out infinite;
+}
+
+@keyframes urgency-pulse {
+    0%, 100% { border-color: rgba(239, 68, 68, 0.3); }
+    50% { border-color: rgba(239, 68, 68, 0.6); }
+}
+
+.urgency-badge svg {
+    width: 20px;
+    height: 20px;
+    color: #EF4444;
+    flex-shrink: 0;
+}
+
+.urgency-badge span {
+    font-size: 13px;
+    color: #F9F9F9;
+    line-height: 1.4;
+}
+
+.urgency-badge strong {
+    color: #EF4444;
+}
+
+/* ============================================
+   CONTADOR DE VISUALIZAÇÕES
+   ============================================ */
+.viewers-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #9CA3AF;
+}
+
+.viewers-counter .dot {
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.viewers-counter .count {
+    color: #10B981;
+    font-weight: 600;
+}
